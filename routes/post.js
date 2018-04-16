@@ -3,6 +3,7 @@ const router = express.Router();
 const PostModel = require("../models/posts");
 const CommentModel = require("../models/comments");
 const checkLogin = require("../middlewares/check").checkLogin;
+const checkLoginRoot = require("../middlewares/check").checkLoginRoot;
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
@@ -19,14 +20,10 @@ router.get("/", function(req, res, next) {
 })
 
 // GET /posts/create 发表文章页
-router.get('/create', checkLogin, function (req, res, next) {
+router.get('/create', checkLoginRoot, function (req, res, next) {
   res.render('create')
 })
 
-// GET /posts/create 发表文章页
-router.get("/create", checkLogin, function(req, res, next) {
-  res.send("发表文章页");
-});
 
 // GET /posts/:postId 单独一篇的文章页
 router.get('/:postId', function (req, res, next) {
